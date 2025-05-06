@@ -67,7 +67,7 @@ public partial class DebugDraw2D : Node2D
             Vector2[] points = primitive.GetPoints();
             if (primitive.Filled)
             {
-                if(Geometry2D.TriangulatePolygon(points).Length > 0)
+                if (Geometry2D.TriangulatePolygon(points).Length > 0)
                 {
                     DrawPolygon(points, [primitive.Color]);
                 }
@@ -172,6 +172,19 @@ public partial class DebugDraw2D : Node2D
     {
         DebugRect2D rect = new(center, size, color ?? Colors.Red, true, lineWidth, duration);
         _rects.Add(rect);
+    }
+
+    public static void Polygon(Vector2[] points, Color? color = null, int lineWidth = 1, float duration = 0)
+    {
+        int numPoints = points.Length;
+        for (int i = 0; i < numPoints; i++)
+        {
+            var start = points[i];
+            var end = points[(i + 1) % numPoints];
+
+            DebugLine2D line = new(start, end, lineWidth, duration, Colors.Red);
+            _lines.Add(line);
+        }
     }
 
 }
