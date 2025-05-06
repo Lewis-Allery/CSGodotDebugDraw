@@ -1,6 +1,19 @@
 ![Godot 4.0](https://img.shields.io/badge/Godot-v4.0-%23478cbf?logo=godot-engine&logoColor=white)
 # Overview
 
+C# Version of the Script
+
+# CS Setup -
+
+If you get an error enabling: 
+
+1) res:// -> addons -> csdebugdraw2d
+2) Project needs a sln file. (Add any CS script to generate one).
+3) Build the solution.
+4) Enable the addon in Project -> Plugins
+
+# Original ReadMe
+
 This addon adds support for drawing shapes on the screen for various (mostly debugging) purposes. 
 
 Currently there's only support for 2D drawing but I'll be extending this as I need it.
