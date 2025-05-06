@@ -5,7 +5,10 @@
 .import/
 export.cfg
 export_presets.cfg
+
+# Ignore Godot-generated UID files for C# scripts
 *.cs.uid
+
 
 # Imported translations (automatically generated from CSV files)
 *.translation
