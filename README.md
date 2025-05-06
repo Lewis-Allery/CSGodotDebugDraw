@@ -10,7 +10,9 @@ A **C# conversion** of the original GodotDebugDraw GD scripts, providing functio
 2. Ensure your **Godot Project** has a `.sln` file and that scripts have been built at least once.  
    - Add any C# script to generate a solution file.  
    - Build the project via `dotnet build` in the terminal or using the Godot Editor.  
-3. Enable the addon in **Project → Plugins**.  
+3. Enable the addon in **Project → Plugins**.
+
+# Original Documentation
 
 ## Autoload Setup  
 
