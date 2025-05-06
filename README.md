@@ -1,86 +1,61 @@
-![Godot 4.0](https://img.shields.io/badge/Godot-v4.0-%23478cbf?logo=godot-engine&logoColor=white)
-# Overview
+![Godot 4.0](https://img.shields.io/badge/Godot-v4.0-%23478cbf?logo=godot-engine&logoColor=white)  
 
-C# Version of the Script
+# DebugDraw2D – C# Port of AlmostBearded/GodotDebugDraw  
 
-# CS Setup -
+A **C# conversion** of the original GodotDebugDraw GD scripts, providing functionality for debugging through visual shape rendering.
 
-If you get an error enabling: 
+## Installation  
 
-1) res:// -> addons -> csdebugdraw2d
-2) Project needs a sln file. (Add any CS script to generate one).
-3) Build the solution.
-4) Enable the addon in Project -> Plugins
+1. Copy the `csdebugdraw2d` folder into your `addons` directory (create one if necessary).  
+2. Ensure your **Godot Project** has a `.sln` file and that scripts have been built at least once.  
+   - Add any C# script to generate a solution file.  
+   - Build the project via `dotnet build` in the terminal or using the Godot Editor.  
+3. Enable the addon in **Project → Plugins**.  
 
-# Original ReadMe
+## Autoload Setup  
 
-This addon adds support for drawing shapes on the screen for various (mostly debugging) purposes. 
+To ensure DebugDraw2D is accessible globally, you need to add it as an Autoload script.  
 
-Currently there's only support for 2D drawing but I'll be extending this as I need it.
+### Steps:  
+1. Open **Project → Project Settings**.  
+2. Navigate to the **Autoload** tab.  
+3. Add the `DebugDraw2D` script by locating its path and naming it `DebugDraw2D`.  
 
-![](https://i.imgur.com/2DCAKgp.png)
+Your settings should resemble this:  
+![Example Autoload Setup](https://i.imgur.com/31EuOoz.png)  
 
-# Installation
+## Usage  
 
-Copy the addons/debugdraw2d/ folder into addons/debugdraw2d/ in your project.
+Since `DebugDraw2D` is an Autoload, it is available **globally** in your project.  
 
-## Via Git
+### Available Methods:  
+- `DebugDraw2D.line(...)`  
+- `DebugDraw2D.rect(...)`  
+- `DebugDraw2D.cube(...)`  
+- `DebugDraw2D.arrow(...)`  
+- `DebugDraw2D.circle(...)`  
+- `DebugDraw2D.circle_arc(...)`  
 
-You can install the addon via git by executing:
+### Features:  
+- Draw in any color  
+- Custom line width  
+- Filled shapes using `DebugDraw2D...._filled()`  
+- Render for a single frame or a set duration  
 
-```
-git clone git@github.com:AlmostBearded/GodotDebugDraw.git ADDONS_FOLDER
-mv ADDONS_FOLDER/debugdraw2d $yourproject/addons/debugdraw2d
-``` 
+### Supported Primitives:  
+- Lines  
+- Arrows  
+- Rectangles  
+- Cubes  
+- Circles  
+- Circle Arcs / Pies
+- `Polygons` 
 
-## Manually 
+Explore the source code for additional details—it's lightweight and easy to navigate.  
 
-The alternative to installing via git would be to simply download a zip file of this repository,
-extract it, and copy the `debugdraw2d` folder into your `addons` folder.
+## Extensions & Contributions
 
+Thank you to AlmostBearded for the original GD Script Library.
 
-## Autoload
-
-The only thing left to do is to add an autoload for the `DebugDraw2D` script. 
-
-(If anyone knows how I could automate this please tell me!)
-
-Steps:
-1. Go to Project > Project Settings
-2. Go to the Autoload tab
-3. Add the DebugDraw2D script by locating it via it's path and naming it DebugDraw2D
-
-The result should look something like this: ![](https://i.imgur.com/31EuOoz.png)
-
-
-# Usage
-
-Because you added an Autoload to the DebugDraw2D script you can access it from everywhere with `DebugDraw2D`.
-
-Some of the available methods:
-- `DebugDraw2D.line(...)`
-- `DebugDraw2D.rect(...)`
-- `DebugDraw2D.cube(...)`
-- `DebugDraw2D.arrow(...)`
-- `DebugDraw2D.circle(...)`
-- `DebugDraw2D.circle_arc(...)`
-
-Supported features:
-- Draw in any color
-- Draw with any line width
-- Draw filled shapes with `DebugDraw2D...._filled()`
-- Draw for a any duration or for just one frame
-
-Supported Primitives:
-- Lines
-- Arrows
-- Rectangles
-- Cubes
-- Circles
-- Circle Arcs/Pies
-
-Check the source code if you need more details. It's a fairly small asset so you should find your way around quickly.
-
-# Extensions
-
-Send me your feature requests and I'll see if I can extend the addon with further needed primitives. Alternatively just dig into the source and extend it yourself. Don't forget to send me your pull requests if you do so I can merge them back!
+Need a new feature? Send me a request, and I'll consider extending the addon!  
+Alternatively, feel free to enhance the source code yourself and submit a pull request—I'll review and merge useful additions.  
