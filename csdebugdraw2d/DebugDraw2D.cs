@@ -58,7 +58,6 @@ public partial class DebugDraw2D : Node2D
 
     private void DrawPrimitives(IEnumerable<DebugPrimitive2D> collection)
     {
-        //if (collection.Any()) { return; }
 
         List<DebugPrimitive2D> primitives = collection.ToList();
 
