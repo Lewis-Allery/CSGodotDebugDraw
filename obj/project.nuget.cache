@@ -1,0 +1,10 @@
+{
+  "version": 2,
+  "dgSpecHash": "92alSjZkv1E=",
+  "success": true,
+  "projectFilePath": "C:\\Users\\lewis\\Desktop\\Local Repositories\\CSGodotDebugDraw\\CSDebugDraw2D.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\lewis\\.nuget\\packages\\godotsharp\\4.4.1\\godotsharp.4.4.1.nupkg.sha512"
+  ],
+  "logs": []
+}

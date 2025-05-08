@@ -28,6 +28,12 @@ jobs:
       - name: Pack NuGet package
         run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
+      - name: Extract version from .csproj
+        id: extract_version
+        run: |
+          VERSION=$(cat MyProject.csproj | grep '<Version>' | sed -E 's/.*<Version>(.*)<\/Version>.*/\1/')
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+
       - name: Publish NuGet package
         run: |
           dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json --skip-duplicate
@@ -37,11 +43,11 @@ jobs:
       - name: Create GitHub Release
         uses: softprops/action-gh-release@v1
         with:
-          tag_name: v1.0.0  # You should dynamically set this based on your versioning
+          tag_name: ${{ env.VERSION }}
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-      - name: Upload package to GitHub Release
+      - name: Upload NuGet package to GitHub Release
         uses: softprops/action-gh-release@v1
         with:
           files: ./nupkgs/*.nupkg
