@@ -1,32 +1,41 @@
-name: Publish NuGet Package
+name: Build and Publish NuGet Package
 
 on:
   push:
     branches:
-      - main
-      - master
+      - main  # Trigger this workflow on push to the main branch
 
 jobs:
-  publish:
-    runs-on: ubuntu-latest
+  build-nuget:
+    runs-on: ubuntu-latest  # Use Ubuntu for the CI environment
 
     steps:
-      - name: Checkout repository
-        uses: actions/checkout@v3
+      - name: Checkout code
+        uses: actions/checkout@v3  # Checkout the code from the repo
 
-      - name: Setup .NET SDK
+      - name: Install .NET 8.0 SDK
+        run: |
+          wget https://dotnetcli.azureedge.net/dotnet/Sdk/8.0.0/dotnet-sdk-8.0.0-linux-x64.tar.gz
+          mkdir -p $HOME/dotnet
+          tar zxf dotnet-sdk-8.0.0-linux-x64.tar.gz -C $HOME/dotnet
+          export PATH=$HOME/dotnet:$PATH
+
+      - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '7.0.x' # Or '6.0.x' depending on your target
+          dotnet-version: '8.0.x'  # Set the .NET version you're using
 
       - name: Restore dependencies
-        run: dotnet restore
+        run: dotnet restore  # Restore any dependencies
 
       - name: Build the project
-        run: dotnet build --configuration Release --no-restore
+        run: dotnet build --configuration Release --no-restore  # Build without restoring dependencies again
 
       - name: Pack NuGet package
-        run: dotnet pack --configuration Release --no-build --output ./nupkgs
+        run: dotnet pack --configuration Release --no-build --output ./nupkgs  # Package the project
 
-      - name: Push package to NuGet
-        run: dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+      - name: Publish NuGet package
+        run: |
+          dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
+        env:
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your NuGet API key in GitHub Secrets
