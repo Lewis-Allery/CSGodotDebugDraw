@@ -3,39 +3,40 @@ name: Build and Publish NuGet Package
 on:
   push:
     branches:
-      - main  # Trigger this workflow on push to the main branch
+      - main  # still auto-runs on push to main
+  workflow_dispatch:  # enables manual trigger from GitHub UI
 
 jobs:
   build-nuget:
-    runs-on: ubuntu-latest  # Use Ubuntu for the CI environment
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3  # Checkout the code from the repo
+        uses: actions/checkout@v3
 
       - name: Install .NET 8.0 SDK
         run: |
           wget https://dotnetcli.azureedge.net/dotnet/Sdk/8.0.0/dotnet-sdk-8.0.0-linux-x64.tar.gz
           mkdir -p $HOME/dotnet
           tar zxf dotnet-sdk-8.0.0-linux-x64.tar.gz -C $HOME/dotnet
-          export PATH=$HOME/dotnet:$PATH  # Make the .NET 8.0 SDK available in the current shell session
+          export PATH=$HOME/dotnet:$PATH
 
-      - name: Setup .NET 8.0
+      - name: Setup .NET
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'  # Set the .NET version to 8.0.x
+          dotnet-version: '8.0.x'
 
       - name: Restore dependencies
-        run: dotnet restore  # Restore any dependencies
+        run: dotnet restore
 
       - name: Build the project
-        run: dotnet build --configuration Release --no-restore  # Build without restoring dependencies again
+        run: dotnet build --configuration Release --no-restore
 
       - name: Pack NuGet package
-        run: dotnet pack --configuration Release --no-build --output ./nupkgs  # Package the project
+        run: dotnet pack --configuration Release --no-build --output ./nupkgs
 
       - name: Publish NuGet package
         run: |
           dotnet nuget push ./nupkgs/*.nupkg --api-key ${{ secrets.NUGET_API_KEY }} --source https://api.nuget.org/v3/index.json
         env:
-          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}  # Store your NuGet API key in GitHub Secrets
+          NUGET_API_KEY: ${{ secrets.NUGET_API_KEY }}
