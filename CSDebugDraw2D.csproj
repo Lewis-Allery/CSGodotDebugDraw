@@ -13,4 +13,8 @@
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
   </PropertyGroup>
 
+    <ItemGroup>
+    <PackageReference Include="GodotSharp" Version="4.4.1" /> <!-- or the version of Godot you're targeting -->
+  </ItemGroup>
+
 </Project>
