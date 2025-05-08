@@ -18,12 +18,12 @@ jobs:
           wget https://dotnetcli.azureedge.net/dotnet/Sdk/8.0.0/dotnet-sdk-8.0.0-linux-x64.tar.gz
           mkdir -p $HOME/dotnet
           tar zxf dotnet-sdk-8.0.0-linux-x64.tar.gz -C $HOME/dotnet
-          export PATH=$HOME/dotnet:$PATH
+          export PATH=$HOME/dotnet:$PATH  # Make the .NET 8.0 SDK available in the current shell session
 
-      - name: Setup .NET
+      - name: Setup .NET 8.0
         uses: actions/setup-dotnet@v3
         with:
-          dotnet-version: '8.0.x'  # Set the .NET version you're using
+          dotnet-version: '8.0.x'  # Set the .NET version to 8.0.x
 
       - name: Restore dependencies
         run: dotnet restore  # Restore any dependencies
