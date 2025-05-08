@@ -1,4 +1,6 @@
-![Godot 4.0](https://img.shields.io/badge/Godot-v4.0-%23478cbf?logo=godot-engine&logoColor=white)  
+![Godot 4.0](https://img.shields.io/badge/Godot-v4.0-%23478cbf?logo=godot-engine&logoColor=white) 
+
+https://www.nuget.org/packages/CSDebugDraw2D
 
 # DebugDraw2D – C# Port of AlmostBearded/GodotDebugDraw  
 
